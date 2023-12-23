@@ -19,7 +19,7 @@ export function AdministradorMenu() {
       <ul className="menu-list">
         <li>
           <Link
-            href="/administracion/pagos-servicio"
+            href={"/administracion/pagos-servicio"}
             className={isActive(
               pathName,
               "/administracion/pagos-servicio",
@@ -31,7 +31,7 @@ export function AdministradorMenu() {
           <ul>
             <li>
               <Link
-                href="/administracion/pagos-servicio/tipo/cge"
+                href={"/administracion/pagos-servicio/tipo/cge"}
                 className={isActive(
                   pathName,
                   "/administracion/pagos-servicio/tipo/cge",
@@ -43,7 +43,7 @@ export function AdministradorMenu() {
             </li>
             <li>
               <Link
-                href="/administracion/pagos-servicio/tipo/aguaaltiplano"
+                href={"/administracion/pagos-servicio/tipo/aguaaltiplano"}
                 className={isActive(
                   pathName,
                   "/administracion/pagos-servicio/tipo/aguaaltiplano",
@@ -55,7 +55,7 @@ export function AdministradorMenu() {
             </li>
             <li>
               <Link
-                href="/administracion/pagos-servicio/tipo/pago"
+                href={"/administracion/pagos-servicio/tipo/pago"}
                 className={isActive(
                   pathName,
                   "/administracion/pagos-servicio/tipo/pago",

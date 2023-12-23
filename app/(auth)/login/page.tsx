@@ -96,12 +96,12 @@ export default function LoginPage() {
               <div className="level box">
                 <div className="level-left">
                   <div className="level-item">
-                    <Link href="/reset-contraseña">Olvidé mi contraseña</Link>
+                    <Link href={"/reset-contraseña"}>Olvidé mi contraseña</Link>
                   </div>
                 </div>
                 <div className="level-right">
                   <div className="level-item">
-                    <Link href="/registro">Crear cuenta</Link>
+                    <Link href={"/registro"}>Crear cuenta</Link>
                   </div>
                 </div>
               </div>

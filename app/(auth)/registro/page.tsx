@@ -119,7 +119,7 @@ export default function RegisterPage() {
               <div className="level box">
                 <div className="level-left">
                   <div className="level-item">
-                    <Link href="/login">Ya tengo cuenta</Link>
+                    <Link href={"/login"}>Ya tengo cuenta</Link>
                   </div>
                 </div>
               </div>

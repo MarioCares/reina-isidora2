@@ -50,7 +50,10 @@ export default function AddPaymentButton({
   const OkNotificacion = () => (
     <div className="notification is-primary">
       <h1 className="title is-4">Documento Agregado!</h1>
-      <Link href="/administracion/pagos-servicio" className="button is-default">
+      <Link
+        href={"/administracion/pagos-servicio"}
+        className="button is-default"
+      >
         Volver a listado de Pagos
       </Link>
     </div>
