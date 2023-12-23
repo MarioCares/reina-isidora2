@@ -1,0 +1,47 @@
+"use client";
+
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+
+interface IUiContext {
+  isSideBarVisible: boolean;
+  isNavbarVisible: boolean;
+  setIsSideBarVisible: Dispatch<SetStateAction<boolean>>;
+  setIsNavbarVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+const defaultValues = {
+  isSideBarVisible: false,
+  isNavbarVisible: false,
+  setIsSideBarVisible: () => {},
+  setIsNavbarVisible: () => {},
+};
+
+export const UiContext = createContext<IUiContext>(defaultValues);
+
+export function UiContextProvider({ children }: { children: ReactNode }) {
+  const [isSideBarVisible, setIsSideBarVisible] = useState<boolean>(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState<boolean>(false);
+
+  const value = useMemo(
+    () => ({
+      isSideBarVisible,
+      setIsSideBarVisible,
+      isNavbarVisible,
+      setIsNavbarVisible,
+    }),
+    [isSideBarVisible, isNavbarVisible]
+  );
+
+  return <UiContext.Provider value={value}>{children}</UiContext.Provider>;
+}
+export function useUiContext() {
+  return useContext(UiContext);
+}

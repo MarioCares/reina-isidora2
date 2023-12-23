@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "ServicePayment" ALTER COLUMN "expireAt" SET DATA TYPE DATE,
+ALTER COLUMN "paymentAt" SET DATA TYPE DATE;

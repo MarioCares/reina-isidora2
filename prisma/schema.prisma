@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Apartment {
+  id        Int     @id @default(autoincrement())
+  number    Int
+  prorating Decimal @default(0) @db.Decimal(10, 9)
+  owners    User[]
+
+  @@map("apartments")
+}
+
+model User {
+  id            String     @id @default(uuid())
+  name          String
+  email         String?    @unique
+  password      String?
+  emailVerified DateTime?  @map("email_verified")
+  image         String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  role          Role       @default(OWNER)
+  accounts      Account[]
+  sessions      Session[]
+  apartmentId   Int?
+  apartment     Apartment? @relation(fields: [apartmentId], references: [id])
+
+  @@map("users")
+}
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String   @map("user_id")
+  type              String?
+  provider          String
+  providerAccountId String   @map("provider_account_id")
+  token_type        String?
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  scope             String?
+  id_token          String?  @db.Text
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String?  @map("user_id")
+  sessionToken String   @unique @map("session_token") @db.Text
+  accessToken  String?  @map("access_token") @db.Text
+  expires      DateTime
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("sessions")
+}
+
+model ServicePayment {
+  id                 Int                @id @default(autoincrement())
+  servicePaymentType ServicePaymentType @default(PAGO)
+  documentId         String
+  expireAt           DateTime           @db.Date
+  paymentAt          DateTime?          @db.Date
+  amount             Int
+  observation        String             @db.Text
+  file               String?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
+  OWNER
+}
+
+enum ServicePaymentType {
+  PAGO
+  CGE
+  AGUAALTIPLANO
+}
