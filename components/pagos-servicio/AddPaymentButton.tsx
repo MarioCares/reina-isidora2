@@ -11,7 +11,7 @@ import OkNotification from "@/components/ui/OkNotification";
 
 interface AddPaymentButtonProps {
   initialServicePayment: string;
-  servicePaymentTypes: Record<string, string>;
+  servicePaymentTypes: { value: string; label: string }[];
 }
 
 export default function AddPaymentButton({
