@@ -17,7 +17,9 @@ const getServicePayment = async (id: number): Promise<ServicePayment> => {
   return (await data.json()) as ServicePayment;
 };
 
-const getServicePaymentTypes = async (): Promise<Record<string, string>> => {
+const getServicePaymentTypes = async (): Promise<
+  { value: string; label: string }[]
+> => {
   const data = await fetch(
     `http://localhost:3000/api/params/service-payment-types`
   );

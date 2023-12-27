@@ -12,7 +12,7 @@ export default function ReviewServicePayment({
   servicePaymentTypes,
 }: {
   servicePayment: ServicePayment;
-  servicePaymentTypes: Record<string, string>;
+  servicePaymentTypes: { value: string; label: string }[];
 }) {
   const { handleUpdatePayment, loadingUpdatePayment, statusUpdatePayment } =
     useUpdatePayment();
