@@ -19,3 +19,23 @@ export function SelectFromRecord({
     </select>
   );
 }
+
+export function SelectFromMap({
+  name,
+  map,
+  selected,
+}: {
+  name: string;
+  map: { value: string; label: string }[];
+  selected: string;
+}) {
+  return (
+    <select name={name} id={name} defaultValue={selected}>
+      {map.map((item: { value: string; label: string }) => (
+        <option key={item.value} value={item.value}>
+          {item.label}
+        </option>
+      ))}
+    </select>
+  );
+}

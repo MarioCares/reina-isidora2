@@ -1,4 +1,4 @@
-import { SelectFromRecord } from "@/utils/Select";
+import { SelectFromMap } from "@/utils/Select";
 import React, { FormEvent } from "react";
 import { ServicePayment } from "@prisma/client";
 import { dateTimeToDateEn } from "@/utils/Strings";
@@ -6,7 +6,7 @@ import { dateTimeToDateEn } from "@/utils/Strings";
 interface ServicePaymentFormProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   initialServicePayment: string;
-  servicePaymentTypes: Record<string, string>;
+  servicePaymentTypes: { value: string; label: string }[];
   formData?: ServicePayment;
 }
 
@@ -24,9 +24,9 @@ export default function ServicePaymentForm({
         </label>
         <div className="control is-expanded">
           <div className="select is-fullwidth is-medium">
-            <SelectFromRecord
+            <SelectFromMap
               name="servicePaymentType"
-              record={servicePaymentTypes}
+              map={servicePaymentTypes}
               selected={initialServicePayment}
             />
           </div>
