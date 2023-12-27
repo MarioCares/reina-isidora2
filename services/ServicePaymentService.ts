@@ -15,7 +15,15 @@ const UpdateServicePayment = (data: IAddServicePayment) =>
     headers: {},
   });
 
+const DeleteServicePayment = (paymentId: number) =>
+  Client(`/api/service-payment/${paymentId}`, {
+    method: "DELETE",
+    body: {},
+    headers: {},
+  });
+
 export const ServicePaymentService = {
   AddServicePayment,
   UpdateServicePayment,
+  DeleteServicePayment,
 };

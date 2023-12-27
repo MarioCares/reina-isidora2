@@ -3,11 +3,15 @@ import AddPaymentButton from "@/components/pagos-servicio/AddPaymentButton";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { ServicePayment } from "@prisma/client";
-import { dateTimeToDateEs } from "@/utils/Strings";
+import { dateTimeToDateEs, serviceTypes } from "@/utils/Strings";
 import Icono from "@/components/ui/Icono";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faFile } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import DeletePaymentButton from "@/components/pagos-servicio/DeletePaymentButton";
+import { IServicePaymentWithTotalAmount } from "@/interfaces/pagos-servicio/Agreggations";
+import { ServicePaymentToOneBarChart } from "@/utils/DataToCharts";
+import { ServicePaymentChart } from "@/components/pagos-servicio/ServicePaymentChart";
+import { checkInEnum } from "@/utils/Validations";
 
 export const revalidate: number = 0;
 
@@ -20,7 +24,13 @@ const getServicePaymentTypes = async (): Promise<Record<string, string>> => {
 
 const getServicePaymentDocuments = async (
   type: string
-): Promise<ServicePayment[]> => {
+): Promise<IServicePaymentWithTotalAmount> => {
+  if (!checkInEnum(type)) {
+    return {
+      servicePayments: [],
+      totalAmount: 0,
+    };
+  }
   const data = await fetch(
     `http://localhost:3000/api/service-payment/documents/${type}`,
     {
@@ -29,7 +39,7 @@ const getServicePaymentDocuments = async (
       },
     }
   );
-  return (await data.json()) as ServicePayment[];
+  return (await data.json()) as IServicePaymentWithTotalAmount;
 };
 
 export default async function ServicePaymentPage({
@@ -43,11 +53,33 @@ export default async function ServicePaymentPage({
   }
 
   const servicePaymentTypes = await getServicePaymentTypes();
-  const servicePaymentDocuments = await getServicePaymentDocuments(
-    params.serviceType.toUpperCase()
+  const servicePaymentDocumentsWithTotalAmount =
+    await getServicePaymentDocuments(params.serviceType.toUpperCase());
+
+  const chart = ServicePaymentToOneBarChart(
+    servicePaymentDocumentsWithTotalAmount.servicePayments
+      .reverse()
+      .map((servicePaymentDocument) => ({
+        month: dateTimeToDateEs(servicePaymentDocument.expireAt),
+        amount: servicePaymentDocument.amount,
+      }))
   );
 
-  console.log("servicePaymentDocuments", servicePaymentDocuments);
+  const option = {
+    xAxis: {
+      type: "category",
+      data: chart.xData,
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: chart.seriesData,
+        type: "bar",
+      },
+    ],
+  };
 
   return (
     <div className="p-3">
@@ -57,7 +89,7 @@ export default async function ServicePaymentPage({
             <h1 className="title is-2">Pagos de Servicio - </h1>
           </div>
           <div className="level-item">
-            <h1 className="title is-2">{params.serviceType.toUpperCase()}</h1>
+            <h1 className="title is-2">{serviceTypes[params.serviceType]}</h1>
           </div>
         </div>
         <div className="level-right">
@@ -84,32 +116,61 @@ export default async function ServicePaymentPage({
                 </tr>
               </thead>
               <tbody>
-                {servicePaymentDocuments.map((document) => (
-                  <tr key={document.id}>
-                    <td>{document.documentId}</td>
-                    <td className="inline-text">
-                      {dateTimeToDateEs(document.expireAt)}
-                    </td>
-                    <td className="inline-text">
-                      {dateTimeToDateEs(document.paymentAt)}
-                    </td>
-                    <td>{document.observation}</td>
-                    <td className="inline-text has-text-right">
-                      $ {document.amount.toLocaleString("de-DE")}
-                    </td>
-                    <td>
-                      <Link
-                        href={`/administracion/pagos-servicio/${document.id}`}
-                        className="button is-warning"
-                      >
-                        <Icono icon={faEdit} />
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+                {servicePaymentDocumentsWithTotalAmount.servicePayments.map(
+                  (document) => (
+                    <tr key={document.id}>
+                      <td>{document.documentId}</td>
+                      <td className="inline-text">
+                        {dateTimeToDateEs(document.expireAt)}
+                      </td>
+                      <td className="inline-text">
+                        {dateTimeToDateEs(document.paymentAt)}
+                      </td>
+                      <td>{document.observation}</td>
+                      <td className="inline-text has-text-right">
+                        $ {document.amount.toLocaleString("de-DE")}
+                      </td>
+                      <td>
+                        <div className="buttons">
+                          <Link
+                            href={`/administracion/pagos-servicio/${document.id}`}
+                            className="button is-warning"
+                          >
+                            <Icono icon={faEdit} />
+                          </Link>
+                          {document.file && (
+                            <a
+                              href={document.file}
+                              target="_blank"
+                              className="button is-link"
+                            >
+                              <Icono icon={faFile} />
+                            </a>
+                          )}
+                          <DeletePaymentButton paymentId={document.id} />
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                )}
               </tbody>
+              <tfoot>
+                <tr>
+                  <th colSpan={5} className="inline-text has-text-right">
+                    ${" "}
+                    {servicePaymentDocumentsWithTotalAmount.totalAmount.toLocaleString(
+                      "de-DE"
+                    )}
+                  </th>
+                </tr>
+              </tfoot>
             </table>
           </div>
+        </div>
+      </div>
+      <div className="columns is-variable is-desktop">
+        <div className="column">
+          <ServicePaymentChart option={option} />
         </div>
       </div>
     </div>

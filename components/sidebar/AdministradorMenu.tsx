@@ -1,15 +1,11 @@
-import {
-  faBolt,
-  faCogs,
-  faDollar,
-  faDroplet,
-  faFileInvoice,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCogs, faFileInvoice } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import Link from "next/link";
-import { isActive } from "@/utils/Strings";
+import { isActive, serviceTypes } from "@/utils/Strings";
 import { usePathname } from "next/navigation";
 import Icono from "@/components/ui/Icono";
+import { ServicePaymentType } from ".prisma/client";
+import { IconsByString } from "@/utils/Icons";
 
 export function AdministradorMenu() {
   const pathName = usePathname();
@@ -29,42 +25,25 @@ export function AdministradorMenu() {
             <Icono icon={faFileInvoice} text="Pagos de servicio" />
           </Link>
           <ul>
-            <li>
-              <Link
-                href={"/administracion/pagos-servicio/tipo/cge"}
-                className={isActive(
-                  pathName,
-                  "/administracion/pagos-servicio/tipo/cge",
-                  false
-                )}
-              >
-                <Icono icon={faBolt} text="CGE" />
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"/administracion/pagos-servicio/tipo/aguaaltiplano"}
-                className={isActive(
-                  pathName,
-                  "/administracion/pagos-servicio/tipo/aguaaltiplano",
-                  false
-                )}
-              >
-                <Icono icon={faDroplet} text="Aguas del Altiplano" />
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"/administracion/pagos-servicio/tipo/pago"}
-                className={isActive(
-                  pathName,
-                  "/administracion/pagos-servicio/tipo/pago",
-                  false
-                )}
-              >
-                <Icono icon={faDollar} text="Otros Pagos" />
-              </Link>
-            </li>
+            {Object.values(ServicePaymentType).map((value) => {
+              return (
+                <li key={value}>
+                  <Link
+                    href={`/administracion/pagos-servicio/tipo/${value}`}
+                    className={isActive(
+                      pathName,
+                      `/administracion/pagos-servicio/tipo/${value}`,
+                      false
+                    )}
+                  >
+                    <Icono
+                      icon={IconsByString[value]}
+                      text={serviceTypes[value]}
+                    />
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </li>
         <li>

@@ -6,8 +6,8 @@ import Modal from "@/components/ui/Modal";
 import Icono from "@/components/ui/Icono";
 import useAddPayment from "@/hooks/pagos-servicio/useAddPayment";
 import { IAddServicePayment } from "@/interfaces/pagos-servicio/IAddPayment";
-import Link from "next/link";
 import ServicePaymentForm from "@/components/pagos-servicio/Form";
+import OkNotification from "@/components/ui/OkNotification";
 
 interface AddPaymentButtonProps {
   initialServicePayment: string;
@@ -47,18 +47,6 @@ export default function AddPaymentButton({
     </button>
   );
 
-  const OkNotificacion = () => (
-    <div className="notification is-primary">
-      <h1 className="title is-4">Documento Agregado!</h1>
-      <Link
-        href={"/administracion/pagos-servicio"}
-        className="button is-default"
-      >
-        Volver a listado de Pagos
-      </Link>
-    </div>
-  );
-
   return (
     <>
       <button
@@ -74,7 +62,13 @@ export default function AddPaymentButton({
         successButton={<SuccessButton />}
         isLoading={loadingAddPayment}
       >
-        {statusAddPayment === "ok" && <OkNotificacion />}
+        {statusAddPayment === "ok" && (
+          <OkNotification
+            title="Documento Agregado!"
+            link={"/administracion/pagos-servicio"}
+            buttonText="Volver a listado de Pagos"
+          />
+        )}
         {statusAddPayment === "!ok" && (
           <div className="notification is-danger">{statusAddPayment}</div>
         )}

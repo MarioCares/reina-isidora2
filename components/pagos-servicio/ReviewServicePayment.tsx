@@ -5,6 +5,7 @@ import React, { FormEvent } from "react";
 import { ServicePayment } from "@prisma/client";
 import useUpdatePayment from "@/hooks/pagos-servicio/useUpdatePayment";
 import { IAddServicePayment } from "@/interfaces/pagos-servicio/IAddPayment";
+import OkNotification from "@/components/ui/OkNotification";
 
 export default function ReviewServicePayment({
   servicePayment,
@@ -33,7 +34,13 @@ export default function ReviewServicePayment({
   };
   return (
     <div className="box">
-      {statusUpdatePayment === "ok" && <h1>Actualizado correctamente</h1>}
+      {statusUpdatePayment === "ok" && (
+        <OkNotification
+          title="Documento Actualizado!"
+          link={`/administracion/pagos-servicio/tipo/${servicePayment.servicePaymentType}`}
+          buttonText="Volver a listado de Pagos"
+        />
+      )}
       <ServicePaymentForm
         onSubmit={onSubmit}
         initialServicePayment={servicePayment.servicePaymentType}

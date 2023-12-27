@@ -2,15 +2,24 @@ import { NextResponse } from "next/server";
 import { getErrorMessage } from "@/utils/Errors";
 import { prisma } from "@/lib/prisma";
 import { ServicePayment } from "@prisma/client";
+import { IServicePaymentWithTotalAmount } from "@/interfaces/pagos-servicio/Agreggations";
 
-export async function GET(): Promise<NextResponse<ServicePayment[]>> {
+export async function GET(): Promise<
+  NextResponse<IServicePaymentWithTotalAmount>
+> {
   const servicePayments: ServicePayment[] =
     await prisma.servicePayment.findMany({
       orderBy: {
         expireAt: "desc",
       },
     });
-  return NextResponse.json(servicePayments);
+  const withTotal = servicePayments.reduce((accumulate, servicePayment) => {
+    return accumulate + servicePayment.amount;
+  }, 0);
+  return NextResponse.json({
+    servicePayments,
+    totalAmount: withTotal,
+  } as IServicePaymentWithTotalAmount);
 }
 
 export async function POST(req: Request) {
