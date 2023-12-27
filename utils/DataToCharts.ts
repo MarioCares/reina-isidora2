@@ -23,9 +23,9 @@ export function ServicePaymentToMultipleBarChart(
   const extractedServicePaymentTypes = data
     .map((item) => item.serviceType)
     .filter((value, index, self) => self.indexOf(value) === index);
-  const extractedMonths = data
-    .map((item) => item.month)
-    .filter((value, index, self) => self.indexOf(value) === index);
+  // const extractedMonths = data
+  //   .map((item) => item.month)
+  //   .filter((value, index, self) => self.indexOf(value) === index);
 
   const resultadoParcial = data.reduce(
     (acumulador: any, { amount, serviceType, month }) => {

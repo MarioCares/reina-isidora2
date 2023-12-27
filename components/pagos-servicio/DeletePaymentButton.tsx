@@ -14,8 +14,7 @@ export default function DeletePaymentButton({
 }) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { loadingDeletePayment, handleDeletePayment, statusDeletePayment } =
-    useDeletePayment();
+  const { loadingDeletePayment, handleDeletePayment } = useDeletePayment();
   const handleDelete = () => setIsModalOpen(true);
 
   const onConfirmDelete = () => {
