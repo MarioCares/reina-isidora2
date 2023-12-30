@@ -17,6 +17,11 @@ export const serviceTypes: { [key: string]: string } = {
   AGUAALTIPLANO: "Aguas del Altiplano",
   CGE: "CGE",
   PAGO: "Otros Pagos",
+  RETIROBASURA: "Retiro de Basura",
+  MANTENCION: "Mantenciones",
+  CAJACHICA: "Caja Chica",
+  SEGURO: "Seguro",
+  REMUNERACIONES: "Remuneraciones",
 };
 
 export const bankAccountTypes: { [key: string]: string } = {

@@ -3,7 +3,7 @@
 import React from "react";
 import { faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useUiContext } from "@/context/UiContext";
-import { AdministradorMenu } from "@/components/sidebar/AdministradorMenu";
+import { AdministradorMenu } from "@/components/ui/sidebar/AdministradorMenu";
 import { isActive } from "@/utils/Strings";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -23,7 +23,7 @@ export function Sidebar({ role }: { role: string }) {
           <p className="menu-label has-text-lighter">General</p>
           <ul className="menu-list">
             <li>
-              <Link href="/" className={isActive(pathName, ["/"], false)}>
+              <Link href="/public" className={isActive(pathName, ["/"], false)}>
                 <Icono icon={faTachometerAlt} text="Escritorio" />
               </Link>
             </li>

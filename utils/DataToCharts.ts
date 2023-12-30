@@ -37,11 +37,26 @@ export function ServicePaymentToMultipleBarChart(
   );
 
   const resultadoFinal = Object.values(resultadoParcial).map(
-    ({ month, CGE, AGUAALTIPLANO, PAGO }: any) => ({
+    ({
+      month,
+      CGE,
+      AGUAALTIPLANO,
+      PAGO,
+      RETIROBASURA,
+      MANTENCION,
+      CAJACHICA,
+      SEGURO,
+      REMUNERACIONES,
+    }: any) => ({
       month,
       CGE: CGE || 0,
       AGUAALTIPLANO: AGUAALTIPLANO || 0,
       PAGO: PAGO || 0,
+      RETIROBASURA: RETIROBASURA || 0,
+      MANTENCION: MANTENCION || 0,
+      CAJACHICA: CAJACHICA || 0,
+      SEGURO: SEGURO || 0,
+      REMUNERACIONES: REMUNERACIONES || 0,
     })
   );
 

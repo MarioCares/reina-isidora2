@@ -122,6 +122,11 @@ enum ServicePaymentType {
   PAGO
   CGE
   AGUAALTIPLANO
+  RETIROBASURA
+  MANTENCION
+  CAJACHICA
+  SEGURO
+  REMUNERACIONES
 }
 
 enum ParkingFloor {

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
 import { Navbar } from "@/components/Navbar";
-import { Sidebar } from "@/components/sidebar/Sidebar";
+import { Sidebar } from "@/components/ui/sidebar/Sidebar";
 import { UiContextProvider } from "@/context/UiContext";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
