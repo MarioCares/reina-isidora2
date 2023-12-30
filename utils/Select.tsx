@@ -1,4 +1,5 @@
 import React from "react";
+import { IMapString } from "@/interfaces/IMap";
 
 export function SelectFromRecord({
   name,
@@ -26,12 +27,12 @@ export function SelectFromMap({
   selected,
 }: {
   name: string;
-  map: { value: string; label: string }[];
+  map: IMapString[];
   selected: string;
 }) {
   return (
     <select name={name} id={name} defaultValue={selected}>
-      {map.map((item: { value: string; label: string }) => (
+      {map.map((item: IMapString) => (
         <option key={item.value} value={item.value}>
           {item.label}
         </option>

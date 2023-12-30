@@ -8,10 +8,11 @@ import useAddPayment from "@/hooks/pagos-servicio/useAddPayment";
 import { IAddServicePayment } from "@/interfaces/pagos-servicio/IAddPayment";
 import ServicePaymentForm from "@/components/pagos-servicio/Form";
 import OkNotification from "@/components/ui/OkNotification";
+import { IMapString } from "@/interfaces/IMap";
 
 interface AddPaymentButtonProps {
   initialServicePayment: string;
-  servicePaymentTypes: { value: string; label: string }[];
+  servicePaymentTypes: IMapString[];
 }
 
 export default function AddPaymentButton({
@@ -69,7 +70,7 @@ export default function AddPaymentButton({
             buttonText="Volver a listado de Pagos"
           />
         )}
-        {statusAddPayment === "!ok" && (
+        {statusAddPayment !== "ok" && (
           <div className="notification is-danger">{statusAddPayment}</div>
         )}
         <ServicePaymentForm

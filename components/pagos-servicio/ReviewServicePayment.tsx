@@ -6,13 +6,14 @@ import { ServicePayment } from "@prisma/client";
 import useUpdatePayment from "@/hooks/pagos-servicio/useUpdatePayment";
 import { IAddServicePayment } from "@/interfaces/pagos-servicio/IAddPayment";
 import OkNotification from "@/components/ui/OkNotification";
+import { IMapString } from "@/interfaces/IMap";
 
 export default function ReviewServicePayment({
   servicePayment,
   servicePaymentTypes,
 }: {
   servicePayment: ServicePayment;
-  servicePaymentTypes: { value: string; label: string }[];
+  servicePaymentTypes: IMapString[];
 }) {
   const { handleUpdatePayment, loadingUpdatePayment, statusUpdatePayment } =
     useUpdatePayment();

@@ -1,4 +1,9 @@
-import { faCogs, faFileInvoice } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBuilding,
+  faCogs,
+  faFileInvoice,
+  faPeopleGroup,
+} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import Link from "next/link";
 import { isActive, serviceTypes } from "@/utils/Strings";
@@ -12,13 +17,34 @@ export function AdministradorMenu() {
   return (
     <>
       <p className="menu-label has-text-lighter">Administración</p>
+
       <ul className="menu-list">
+        <li>
+          <Link href={"/administracion/departamentos"}>
+            <Icono icon={faBuilding} text="Departamentos" />
+          </Link>
+        </li>
+        <li>
+          <Link
+            href={"/administracion/personal"}
+            className={isActive(
+              pathName,
+              ["/administracion/personal", "/administracion/personal/*"],
+              false
+            )}
+          >
+            <Icono icon={faPeopleGroup} text="Personal" />
+          </Link>
+        </li>
         <li>
           <Link
             href={"/administracion/pagos-servicio"}
             className={isActive(
               pathName,
-              "/administracion/pagos-servicio",
+              [
+                "/administracion/pagos-servicio",
+                "/administracion/pagos-servicio/*",
+              ],
               false
             )}
           >
@@ -32,7 +58,7 @@ export function AdministradorMenu() {
                     href={`/administracion/pagos-servicio/tipo/${value}`}
                     className={isActive(
                       pathName,
-                      `/administracion/pagos-servicio/tipo/${value}`,
+                      [`/administracion/pagos-servicio/tipo/${value}`],
                       false
                     )}
                   >

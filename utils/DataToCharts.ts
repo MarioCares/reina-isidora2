@@ -19,7 +19,6 @@ export function ServicePaymentToOneBarChart(
 export function ServicePaymentToMultipleBarChart(
   data: { amount: number; month: string; serviceType: ServicePaymentType }[]
 ) {
-  console.log("data", data);
   const extractedServicePaymentTypes = data
     .map((item) => item.serviceType)
     .filter((value, index, self) => self.indexOf(value) === index);

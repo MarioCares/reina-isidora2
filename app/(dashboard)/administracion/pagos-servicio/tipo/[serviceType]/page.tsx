@@ -12,12 +12,11 @@ import { IServicePaymentWithTotalAmount } from "@/interfaces/pagos-servicio/Agre
 import { ServicePaymentToOneBarChart } from "@/utils/DataToCharts";
 import { ServicePaymentChart } from "@/components/pagos-servicio/ServicePaymentChart";
 import { checkInEnum } from "@/utils/Validations";
+import { IMapString } from "@/interfaces/IMap";
 
 export const revalidate: number = 0;
 
-const getServicePaymentTypes = async (): Promise<
-  { value: string; label: string }[]
-> => {
+const getServicePaymentTypes = async (): Promise<IMapString[]> => {
   const data = await fetch(
     `http://localhost:3000/api/params/service-payment-types`
   );

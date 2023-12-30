@@ -62,7 +62,7 @@ export function Navbar({ initials }: { initials: string }) {
         <div className="navbar-start">
           <Link
             href={"/"}
-            className={`navbar-item ${isActive(pathName, "/", true)}`}
+            className={`navbar-item ${isActive(pathName, ["/"], true)}`}
           >
             <Icono icon={faHouseUser} text="Inicio" />
           </Link>

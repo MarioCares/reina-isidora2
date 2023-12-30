@@ -5,6 +5,7 @@ import React from "react";
 import { ServicePayment } from "@prisma/client";
 import ItemNotFound from "@/components/ui/ItemNotFound";
 import ReviewServicePayment from "@/components/pagos-servicio/ReviewServicePayment";
+import { IMapString } from "@/interfaces/IMap";
 
 export const revalidate: number = 0;
 
@@ -17,9 +18,7 @@ const getServicePayment = async (id: number): Promise<ServicePayment> => {
   return (await data.json()) as ServicePayment;
 };
 
-const getServicePaymentTypes = async (): Promise<
-  { value: string; label: string }[]
-> => {
+const getServicePaymentTypes = async (): Promise<IMapString[]> => {
   const data = await fetch(
     `http://localhost:3000/api/params/service-payment-types`
   );

@@ -19,6 +19,13 @@ export const serviceTypes: { [key: string]: string } = {
   PAGO: "Otros Pagos",
 };
 
+export const bankAccountTypes: { [key: string]: string } = {
+  CTACTE: "Cuenta Corriente",
+  CTAVISTA: "Cuenta Vista",
+  CTARUT: "Cuenta RUT",
+  OTRO: "Otra",
+};
+
 export function getInitials(varchar: string): string {
   return varchar
     .split(" ")
@@ -28,13 +35,21 @@ export function getInitials(varchar: string): string {
 
 export function isActive(
   pathName: string,
-  path: string,
+  availablePaths: string[],
   isNavbar: boolean
 ): string {
   const className = isNavbar
     ? "link-active"
     : "has-background-primary has-text-weight-bold is-active";
-  return pathName === path ? className : "";
+  if (availablePaths.some((url) => url.includes("*"))) {
+    // ignore last part
+    return availablePaths.includes(
+      `${pathName.slice(0, pathName.lastIndexOf("/") + 1)}*`
+    )
+      ? className
+      : "";
+  }
+  return availablePaths.includes(pathName) ? className : "";
 }
 
 export function dateTimeToDateEs(datetime: Date | null): string {

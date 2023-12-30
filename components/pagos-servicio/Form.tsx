@@ -2,11 +2,12 @@ import { SelectFromMap } from "@/utils/Select";
 import React, { FormEvent } from "react";
 import { ServicePayment } from "@prisma/client";
 import { dateTimeToDateEn } from "@/utils/Strings";
+import { IMapString } from "@/interfaces/IMap";
 
 interface ServicePaymentFormProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   initialServicePayment: string;
-  servicePaymentTypes: { value: string; label: string }[];
+  servicePaymentTypes: IMapString[];
   formData?: ServicePayment;
 }
 
