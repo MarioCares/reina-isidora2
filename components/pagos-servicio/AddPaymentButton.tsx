@@ -9,6 +9,7 @@ import { IAddServicePayment } from "@/interfaces/pagos-servicio/IAddPayment";
 import ServicePaymentForm from "@/components/pagos-servicio/Form";
 import OkNotification from "@/components/ui/OkNotification";
 import { IMapString } from "@/interfaces/IMap";
+import { SendFormModal } from "@/components/ui/Buttons";
 
 interface AddPaymentButtonProps {
   initialServicePayment: string;
@@ -38,16 +39,6 @@ export default function AddPaymentButton({
     } as IAddServicePayment);
   };
 
-  const SuccessButton = () => (
-    <button
-      className="button is-success"
-      form="form-add-service-payment"
-      type="submit"
-    >
-      Guardar
-    </button>
-  );
-
   return (
     <>
       <button
@@ -60,7 +51,11 @@ export default function AddPaymentButton({
         closeModal={() => setIsModalOpen(!isModalOpen)}
         isOpen={isModalOpen}
         title="Nuevo Documento"
-        successButton={<SuccessButton />}
+        successButton={
+          <SendFormModal form="form-add-service-payment" className="is-success">
+            Guardar
+          </SendFormModal>
+        }
         isLoading={loadingAddPayment}
       >
         {statusAddPayment === "ok" && (

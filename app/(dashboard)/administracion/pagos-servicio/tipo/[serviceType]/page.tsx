@@ -67,6 +67,8 @@ export default async function ServicePaymentPage({
   );
 
   const option = {
+    legend: {},
+    tooltip: {},
     xAxis: {
       type: "category",
       data: chart.xData,

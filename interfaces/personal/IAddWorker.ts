@@ -6,7 +6,7 @@ export interface IWorker {
   afpName: string;
   bank: string;
   healthName: string;
-  baseHourAmount: number;
+  salaryAmount: number;
   bankAccount: string;
   rutDNI: string;
   jobTitle: string;
@@ -14,4 +14,9 @@ export interface IWorker {
   bankAccountType: BankAccountType;
   healthPercent: number;
   startAt: string;
+  mealBonus: number;
+  transportationBonus: number;
+  accountabilityBonus: number;
+  otherBonus: number;
+  baseDays: number;
 }

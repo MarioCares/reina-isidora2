@@ -8,7 +8,7 @@ import { IMapString } from "@/interfaces/IMap";
 import { dateTimeToDateEs } from "@/utils/Strings";
 import Link from "next/link";
 import Icono from "@/components/ui/Icono";
-import { faIdCard } from "@fortawesome/free-solid-svg-icons";
+import { faFileInvoice, faIdCard } from "@fortawesome/free-solid-svg-icons";
 
 export const revalidate: number = 0;
 
@@ -71,12 +71,20 @@ export default async function WorkersPage() {
                     <td>{worker.jobTitle}</td>
                     <td>{dateTimeToDateEs(worker.startAt)}</td>
                     <td>
-                      <Link
-                        href={`/administracion/personal/${worker.id}`}
-                        className="button is-primary"
-                      >
-                        <Icono icon={faIdCard} text={"Ficha"} />
-                      </Link>
+                      <div className="buttons">
+                        <Link
+                          href={`/administracion/personal/${worker.id}`}
+                          className="button is-primary"
+                        >
+                          <Icono icon={faIdCard} text={"Ficha"} />
+                        </Link>
+                        <Link
+                          href={`/administracion/personal/liquidacion/${worker.id}`}
+                          className="button is-info"
+                        >
+                          <Icono icon={faFileInvoice} text={"Liquidaciones"} />
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}

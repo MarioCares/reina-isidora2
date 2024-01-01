@@ -9,6 +9,7 @@ import { IMapString } from "@/interfaces/IMap";
 import useCRUDWorker from "@/hooks/personal/useCRUDWorker";
 import OkNotification from "@/components/ui/OkNotification";
 import { IWorker } from "@/interfaces/personal/IAddWorker";
+import { SendFormModal } from "@/components/ui/Buttons";
 
 interface AddWorkerButtonProps {
   bankAccountTypes: IMapString[];
@@ -28,7 +29,7 @@ export default function AddWorkerButton({
       afpName: data.get("afpName"),
       bank: data.get("bank"),
       healthName: data.get("healthName"),
-      baseHourAmount: Number(data.get("baseHourAmount")),
+      salaryAmount: Number(data.get("salaryAmount")),
       bankAccount: data.get("bankAccount"),
       rutDNI: (data.get("rutDNI") as string).replaceAll(".", ""),
       jobTitle: data.get("jobTitle"),
@@ -36,14 +37,13 @@ export default function AddWorkerButton({
       bankAccountType: data.get("bankAccountType"),
       healthPercent: Number(data.get("healthPercent")),
       startAt: `${data.get("startAt")}T${time}`,
+      transportationBonus: Number(data.get("transportationBonus")),
+      mealBonus: Number(data.get("mealBonus")),
+      accountabilityBonus: Number(data.get("accountabilityBonus")),
+      otherBonus: Number(data.get("otherBonus")),
+      baseDays: Number(data.get("baseDays")),
     } as IWorker);
   };
-
-  const SuccessButton = () => (
-    <button className="button is-success" form="form-worker" type="submit">
-      Guardar
-    </button>
-  );
 
   return (
     <>
@@ -57,7 +57,11 @@ export default function AddWorkerButton({
         closeModal={() => setIsModalOpen(false)}
         isOpen={isModalOpen}
         title={"Nuevo Trabajador"}
-        successButton={<SuccessButton />}
+        successButton={
+          <SendFormModal form="form-worker" className="is-success">
+            Guardar
+          </SendFormModal>
+        }
         isLoading={loadingWorker}
       >
         {statusWorker === "ok" && (

@@ -6,10 +6,16 @@ export function ServicePaymentToOneBarChart(
 ) {
   const xData: string[] = [];
   const seriesData: number[] = [];
-  data.forEach((item) => {
-    xData.push(months[Number(item.month.split("-")[1])]);
-    seriesData.push(item.amount);
+  const monthlyAmount: { [key: number]: number } = {};
+  data.forEach(({ month, amount }) => {
+    const monthTemp = Number(month.split("-")[1]);
+    monthlyAmount[monthTemp] = (monthlyAmount[monthTemp] || 0) + amount;
   });
+  Object.entries(monthlyAmount).map(([month, amount]) => {
+    xData.push(months[parseInt(month)]);
+    seriesData.push(amount);
+  });
+
   return {
     xData,
     seriesData,

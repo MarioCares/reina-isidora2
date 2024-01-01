@@ -47,12 +47,16 @@ export function isActive(
     ? "link-active"
     : "has-background-primary has-text-weight-bold is-active";
   if (availablePaths.some((url) => url.includes("*"))) {
-    // ignore last part
-    return availablePaths.includes(
-      `${pathName.slice(0, pathName.lastIndexOf("/") + 1)}*`
-    )
-      ? className
-      : "";
+    if (availablePaths.includes(pathName)) {
+      return className;
+    } else {
+      // ignore last part and use Wilcard
+      return availablePaths.includes(
+        `${pathName.slice(0, pathName.lastIndexOf("/") + 1)}*`
+      )
+        ? className
+        : "";
+    }
   }
   return availablePaths.includes(pathName) ? className : "";
 }
@@ -62,6 +66,20 @@ export function dateTimeToDateEs(datetime: Date | null): string {
   const [date] = datetime.toString().split("T");
   const [year, month, day] = date.split("-");
   return `${day}-${month}-${year}`;
+}
+
+export function dateTimeToYearMonthEs(datetime: Date | null): string {
+  if (datetime === null) return "";
+  const [date] = datetime.toString().split("T");
+  const [year, month] = date.split("-");
+  return `${month}-${year}`;
+}
+
+export function dateTimeToYearMonthEn(datetime: Date | null): string {
+  if (datetime === null) return "";
+  const [date] = datetime.toString().split("T");
+  const [year, month] = date.split("-");
+  return `${year}-${month}`;
 }
 
 export function dateTimeToDateEn(datetime: Date | null): string {

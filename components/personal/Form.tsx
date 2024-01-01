@@ -97,17 +97,108 @@ export default function WorkerForm({
         </div>
         <div className="column">
           <div className="field">
-            <label htmlFor="baseHourAmount" className="label">
-              Valor Hora
+            <label htmlFor="salaryAmount" className="label">
+              Sueldo Base
             </label>
             <div className="control is-expanded">
               <input
                 type="number"
                 className="input is-medium"
-                name="baseHourAmount"
-                id="baseHourAmount"
+                name="salaryAmount"
+                id="salaryAmount"
                 required
-                defaultValue={formData ? formData.baseHourAmount : ""}
+                defaultValue={formData ? formData.salaryAmount : ""}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="column">
+          <div className="field">
+            <label htmlFor="baseDays" className="label">
+              Días base
+            </label>
+            <div className="control is-expanded">
+              <input
+                type="number"
+                className="input is-medium"
+                name="baseDays"
+                id="baseDays"
+                required
+                defaultValue={formData ? Number(formData.baseDays) : 0}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column">
+          <div className="field">
+            <label htmlFor="transportationBonus" className="label">
+              Bono {formData ? "movilización" : "mov."}
+            </label>
+            <div className="control is-expanded">
+              <input
+                type="number"
+                className="input is-medium"
+                name="transportationBonus"
+                id="transportationBonus"
+                required
+                defaultValue={
+                  formData ? Number(formData.transportationBonus) : 0
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="column">
+          <div className="field">
+            <label htmlFor="mealBonus" className="label">
+              Bono colación
+            </label>
+            <div className="control is-expanded">
+              <input
+                type="number"
+                className="input is-medium"
+                name="mealBonus"
+                id="mealBonus"
+                required
+                defaultValue={formData ? Number(formData.mealBonus) : 0}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="column">
+          <div className="field">
+            <label htmlFor="accountabilityBonus" className="label">
+              Bono respons.
+            </label>
+            <div className="control is-expanded">
+              <input
+                type="number"
+                className="input is-medium"
+                name="accountabilityBonus"
+                id="accountabilityBonus"
+                required
+                defaultValue={
+                  formData ? Number(formData.accountabilityBonus) : 0
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="column">
+          <div className="field">
+            <label htmlFor="otherBonus" className="label">
+              Otros bonos
+            </label>
+            <div className="control is-expanded">
+              <input
+                type="number"
+                className="input is-medium"
+                name="otherBonus"
+                id="otherBonus"
+                required
+                defaultValue={formData ? Number(formData.otherBonus) : 0}
               />
             </div>
           </div>

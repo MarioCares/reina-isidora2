@@ -12,6 +12,7 @@ body {
 .menu-container {
     position: fixed;
     padding-top: 1.75rem;
+    padding-bottom: 2rem;
     height: 100%;
     margin: auto;
     min-width: 300px;
@@ -21,6 +22,7 @@ body {
     transform: translateX(-100%);
     -webkit-transition: all ease 0.5s;
     transition: all ease 0.5s;
+    overflow: scroll;
 }
 
 .menu-container.active {

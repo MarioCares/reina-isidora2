@@ -95,21 +95,62 @@ model ServicePayment {
 }
 
 model Worker {
-  id              Int             @id @default(autoincrement())
-  rutDNI          String          @unique
-  name            String
-  jobTitle        String
-  startAt         DateTime
-  bankAccount     String
-  bank            String
-  bankAccountType BankAccountType @default(OTRO)
-  afpName         String
-  afpPercent      Decimal         @default(0) @db.Decimal(10, 2)
-  healthName      String
-  healthPercent   Decimal         @default(0) @db.Decimal(10, 2)
-  baseHourAmount  Int
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
+  id                  Int             @id @default(autoincrement())
+  rutDNI              String          @unique
+  name                String
+  jobTitle            String
+  startAt             DateTime
+  bankAccount         String
+  bank                String
+  bankAccountType     BankAccountType @default(OTRO)
+  afpName             String
+  afpPercent          Decimal         @default(0) @db.Decimal(10, 2)
+  healthName          String
+  healthPercent       Decimal         @default(0) @db.Decimal(10, 2)
+  salaryAmount        Int
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  payroll             Payroll[]
+  isActive            Boolean?        @default(true)
+  mealBonus           Int?            @default(0)
+  transportationBonus Int?            @default(0)
+  accountabilityBonus Int?            @default(0)
+  otherBonus          Int?            @default(0)
+  baseDays            Int?            @default(0)
+}
+
+model PayrollItem {
+  id          Int             @id @default(autoincrement())
+  isEarning   Boolean
+  isDeduction Boolean
+  isTaxable   Boolean
+  description String
+  details     PayrollDetail[]
+}
+
+model Payroll {
+  id           Int             @id @default(autoincrement())
+  payrollAt    DateTime        @db.Date
+  workerId     Int
+  workedDays   Int
+  absenceDays  Int
+  hours100     Decimal         @default(0) @db.Decimal(10, 2)
+  hours50      Decimal         @default(0) @db.Decimal(10, 2)
+  worker       Worker          @relation(fields: [workerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  isCalculated Boolean         @default(false)
+  payAdvance   Int?            @default(0)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  details      PayrollDetail[]
+}
+
+model PayrollDetail {
+  id            Int         @id @default(autoincrement())
+  payrollId     Int
+  payrollItemId Int
+  amount        Int
+  payroll       Payroll     @relation(fields: [payrollId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  payrollItem   PayrollItem @relation(fields: [payrollItemId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 enum Role {

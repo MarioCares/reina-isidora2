@@ -29,12 +29,30 @@ export function AdministradorMenu() {
             href={"/administracion/personal"}
             className={isActive(
               pathName,
-              ["/administracion/personal", "/administracion/personal/*"],
+              [
+                "/administracion/personal",
+                "/administracion/personal/*",
+                "/administracion/personal/liquidacion/*",
+              ],
               false
             )}
           >
             <Icono icon={faPeopleGroup} text="Personal" />
           </Link>
+          <ul>
+            <li>
+              <Link
+                href={`/administracion/liquidaciones`}
+                className={isActive(
+                  pathName,
+                  [`/administracion/liquidaciones`],
+                  false
+                )}
+              >
+                <Icono icon={faFileInvoice} text={"Liquidaciones"} />
+              </Link>
+            </li>
+          </ul>
         </li>
         <li>
           <Link

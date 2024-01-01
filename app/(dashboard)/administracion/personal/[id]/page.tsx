@@ -5,6 +5,7 @@ import { Worker } from "@prisma/client";
 import React from "react";
 import { IMapString } from "@/interfaces/IMap";
 import ReviewWorker from "@/components/personal/ReviewWorker";
+import ItemNotFound from "@/components/ui/ItemNotFound";
 
 export const revalidate: number = 0;
 
@@ -49,7 +50,14 @@ export default async function WorkerPage({
       </nav>
       <div className="columns is-variable is-desktop">
         <div className="column">
-          <ReviewWorker worker={worker} bankAccountTypes={bankAccountTypes} />
+          {worker.id ? (
+            <ReviewWorker worker={worker} bankAccountTypes={bankAccountTypes} />
+          ) : (
+            <ItemNotFound
+              subtitle={"Trabajador no existe"}
+              link={"/administracion/personal"}
+            />
+          )}
         </div>
       </div>
       <div className="columns is-variable is-desktop">

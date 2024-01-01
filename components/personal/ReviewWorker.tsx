@@ -27,7 +27,7 @@ export default function ReviewWorker({
       afpName: data.get("afpName"),
       bank: data.get("bank"),
       healthName: data.get("healthName"),
-      baseHourAmount: Number(data.get("baseHourAmount")),
+      salaryAmount: Number(data.get("salaryAmount")),
       bankAccount: data.get("bankAccount"),
       rutDNI: (data.get("rutDNI") as string).replaceAll(".", ""),
       jobTitle: data.get("jobTitle"),
@@ -35,6 +35,11 @@ export default function ReviewWorker({
       bankAccountType: data.get("bankAccountType"),
       healthPercent: Number(data.get("healthPercent")),
       startAt: `${data.get("startAt")}T${time}`,
+      transportationBonus: Number(data.get("transportationBonus")),
+      mealBonus: Number(data.get("mealBonus")),
+      accountabilityBonus: Number(data.get("accountabilityBonus")),
+      otherBonus: Number(data.get("otherBonus")),
+      baseDays: Number(data.get("baseDays")),
     } as IWorker);
   };
 
