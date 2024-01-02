@@ -125,7 +125,7 @@ export function HeaderPayrollForm({
             <div className="control is-expanded">
               <input
                 type="number"
-                min={1}
+                min={0}
                 step="any"
                 className="input is-medium"
                 name="hours50"
@@ -146,7 +146,7 @@ export function HeaderPayrollForm({
             <div className="control is-expanded">
               <input
                 type="number"
-                min={1}
+                min={0}
                 step="any"
                 className="input is-medium"
                 name="payAdvance"
