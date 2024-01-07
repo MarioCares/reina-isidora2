@@ -100,8 +100,8 @@ export default async function PayrollPage({
           <UpdatePayrollButton workers={workersMap} formData={payroll} />
         </div>
       </nav>
-      <div className="columns is-variable is-desktop pb-2">
-        <div className="column box">
+      <div className="columns is-variable is-desktop p-2">
+        <div className="column">
           <h1 className="title is-3 has-text-centered">Detalle</h1>
           <table className="table is-fullwidth">
             <tbody>
@@ -143,7 +143,7 @@ export default async function PayrollPage({
           </table>
         </div>
       </div>
-      <div className="columns is-variable is-desktop box p-0">
+      <div className="columns is-variable is-desktop p-2">
         <div className="column">
           <h1 className="title is-3 has-text-centered">Haberes</h1>
           <div className="table-container">

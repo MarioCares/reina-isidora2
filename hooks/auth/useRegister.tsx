@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getErrorMessage } from "@/utils/Errors";
 import { IRegister } from "@/interfaces/auth/IRegister";
-import { UserService } from "@/services/UserService";
+import { UserService } from "@/services/front/UserService";
 
 const useRegister = () => {
   const [loadingRegister, setLoadingRegister] = useState<boolean>(false);

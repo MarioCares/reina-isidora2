@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ServicePaymentService } from "@/services/ServicePaymentService";
+import { ServicePaymentService } from "@/services/front/ServicePaymentService";
 import { getErrorMessage } from "@/utils/Errors";
 
 const useDeletePayment = () => {

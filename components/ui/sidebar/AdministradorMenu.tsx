@@ -45,7 +45,10 @@ export function AdministradorMenu() {
                 href={`/administracion/liquidaciones`}
                 className={isActive(
                   pathName,
-                  [`/administracion/liquidaciones`],
+                  [
+                    `/administracion/liquidaciones`,
+                    "/administracion/liquidaciones/*",
+                  ],
                   false
                 )}
               >

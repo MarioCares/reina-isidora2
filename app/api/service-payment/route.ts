@@ -1,25 +1,26 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getErrorMessage } from "@/utils/Errors";
 import { prisma } from "@/lib/prisma";
-import { ServicePayment } from "@prisma/client";
-import { IServicePaymentWithTotalAmount } from "@/interfaces/pagos-servicio/Agreggations";
+import {
+  IGroupedByTypeServicePayment,
+  IServicePaymentWithTotalAmount,
+} from "@/interfaces/pagos-servicio/Agreggations";
+import { ServicePaymentService } from "@/services/back/ServicePaymentService";
 
-export async function GET(): Promise<
-  NextResponse<IServicePaymentWithTotalAmount>
+export async function GET(
+  request: NextRequest
+): Promise<
+  NextResponse<IServicePaymentWithTotalAmount | IGroupedByTypeServicePayment[]>
 > {
-  const servicePayments: ServicePayment[] =
-    await prisma.servicePayment.findMany({
-      orderBy: {
-        expireAt: "desc",
-      },
-    });
-  const withTotal = servicePayments.reduce((accumulate, servicePayment) => {
-    return accumulate + servicePayment.amount;
-  }, 0);
-  return NextResponse.json({
-    servicePayments,
-    totalAmount: withTotal,
-  } as IServicePaymentWithTotalAmount);
+  const grouped = request.nextUrl.searchParams.get("grouped");
+  const yearMonth = request.nextUrl.searchParams.get("yearMonth");
+  if (grouped === null) {
+    return NextResponse.json(await ServicePaymentService.getAll());
+  } else {
+    return NextResponse.json(
+      await ServicePaymentService.getGroupedByType(yearMonth)
+    );
+  }
 }
 
 export async function POST(req: Request) {

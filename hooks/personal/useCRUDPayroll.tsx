@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IHeaderPayroll } from "@/interfaces/personal/IPayroll";
-import { PayrollService } from "@/services/PayrollService";
+import { PayrollService } from "@/services/front/PayrollService";
 import { getErrorMessage } from "@/utils/Errors";
 
 const useCRUDPayroll = () => {

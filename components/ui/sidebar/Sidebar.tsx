@@ -23,7 +23,7 @@ export function Sidebar({ role }: { role: string }) {
           <p className="menu-label has-text-lighter">General</p>
           <ul className="menu-list">
             <li>
-              <Link href="/public" className={isActive(pathName, ["/"], false)}>
+              <Link href="/" className={isActive(pathName, ["/"], false)}>
                 <Icono icon={faTachometerAlt} text="Escritorio" />
               </Link>
             </li>

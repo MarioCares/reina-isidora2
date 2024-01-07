@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IAddServicePayment } from "@/interfaces/pagos-servicio/IAddPayment";
-import { ServicePaymentService } from "@/services/ServicePaymentService";
+import { ServicePaymentService } from "@/services/front/ServicePaymentService";
 import { getErrorMessage } from "@/utils/Errors";
 
 const useUpdatePayment = () => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { WorkerService } from "@/services/WorkerService";
+import { WorkerService } from "@/services/front/WorkerService";
 import { getErrorMessage } from "@/utils/Errors";
 import { IWorker } from "@/interfaces/personal/IAddWorker";
 
