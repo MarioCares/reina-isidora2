@@ -9,6 +9,7 @@ export enum Role {
 declare module "next-auth" {
   interface User {
     role?: Role;
+    apartmentId: number;
   }
 
   interface Session extends DefaultSession {
@@ -19,5 +20,6 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     role?: Role;
+    apartmentId: number;
   }
 }

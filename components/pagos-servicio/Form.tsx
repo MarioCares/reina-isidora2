@@ -50,7 +50,7 @@ export default function ServicePaymentForm({
       </div>
       <div className="field">
         <label htmlFor="expireAt" className="label">
-          Fecha de Vencimiento
+          Fecha de emisión
         </label>
         <div className="control is-expanded">
           <input

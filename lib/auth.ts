@@ -44,6 +44,7 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           name: user.name,
           role: user.role as Role,
+          apartmentId: user.apartmentId!,
           randomKey: "cruzverde",
         };
       },
@@ -57,6 +58,7 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: token.id,
           randomKey: token.randomKey,
+          apartmentId: token.apartmentId,
           role: token.role,
         },
       };
@@ -67,11 +69,13 @@ export const authOptions: NextAuthOptions = {
           id: number;
           randomKey: string;
           role: Role;
+          apartmentId: number;
         };
         return {
           ...token,
           id: u.id,
           randomKey: u.randomKey,
+          apartmentId: u.apartmentId,
           role: u.role,
         };
       }

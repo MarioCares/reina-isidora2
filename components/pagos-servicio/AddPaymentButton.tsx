@@ -65,7 +65,7 @@ export default function AddPaymentButton({
             buttonText="Volver a listado de Pagos"
           />
         )}
-        {statusAddPayment !== "ok" && (
+        {statusAddPayment && statusAddPayment !== "ok" && (
           <div className="notification is-danger">{statusAddPayment}</div>
         )}
         <ServicePaymentForm

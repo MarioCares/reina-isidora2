@@ -29,21 +29,21 @@ export function Sidebar({ role }: { role: string }) {
             </li>
           </ul>
           {role === "ADMIN" && <AdministradorMenu />}
-          <p className="menu-label has-text-lighter">Other</p>
-          <ul className="menu-list">
-            <li>
-              <a href="#" className="has-text-black">
-                <i className="fas fa-comments icon"></i>
-                Chats
-              </a>
-            </li>
-            <li>
-              <a href="#" className="has-text-black">
-                <i className="fas fa-info-circle icon"></i>
-                Extras
-              </a>
-            </li>
-          </ul>
+          {/*<p className="menu-label has-text-lighter">Other</p>*/}
+          {/*<ul className="menu-list">*/}
+          {/*  <li>*/}
+          {/*    <a href="#" className="has-text-black">*/}
+          {/*      <i className="fas fa-comments icon"></i>*/}
+          {/*      Chats*/}
+          {/*    </a>*/}
+          {/*  </li>*/}
+          {/*  <li>*/}
+          {/*    <a href="#" className="has-text-black">*/}
+          {/*      <i className="fas fa-info-circle icon"></i>*/}
+          {/*      Extras*/}
+          {/*    </a>*/}
+          {/*  </li>*/}
+          {/*</ul>*/}
         </aside>
       </div>
     </div>

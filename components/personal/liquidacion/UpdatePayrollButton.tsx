@@ -62,7 +62,7 @@ export default function UpdatePayrollButton({
         {statusPayroll === "ok" && (
           <OkNotification
             title={"Cabecera actualizada!"}
-            reload={() => window.location.reload()}
+            action={() => window.location.reload()}
             link={""}
             buttonText={"Actualizar página"}
           />

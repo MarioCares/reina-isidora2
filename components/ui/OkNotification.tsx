@@ -5,19 +5,19 @@ interface OkNotificationProps {
   title: string;
   link: string;
   buttonText: string;
-  reload?: () => void;
+  action?: () => void;
 }
 export default function OkNotification({
   title,
   link,
   buttonText,
-  reload,
+  action,
 }: OkNotificationProps) {
   return (
     <div className="notification is-primary">
       <h1 className="title is-4">{title}</h1>
-      {reload ? (
-        <button className="button is-default" type="button" onClick={reload}>
+      {action ? (
+        <button className="button is-default" type="button" onClick={action}>
           {buttonText}
         </button>
       ) : (

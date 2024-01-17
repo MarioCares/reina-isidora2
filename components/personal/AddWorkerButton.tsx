@@ -68,7 +68,7 @@ export default function AddWorkerButton({
           <OkNotification
             title="Documento Agregado!"
             link={""}
-            reload={() => window.location.reload()}
+            action={() => window.location.reload()}
             buttonText="Volver a listado Personal"
           />
         )}

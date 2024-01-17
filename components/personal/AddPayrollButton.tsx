@@ -59,7 +59,7 @@ export default function AddPayrollButton({
           <OkNotification
             title={"Cabecera creada!"}
             link={""}
-            reload={() => window.location.reload()}
+            action={() => window.location.reload()}
             buttonText={"Continuar con detalle"}
           />
         )}
