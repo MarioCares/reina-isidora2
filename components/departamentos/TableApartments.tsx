@@ -9,13 +9,20 @@ import Icono from "@/components/ui/Icono";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 export default function TableApartments({}) {
-  const { loadingApartment, apartments, handleGetApartments, statusAparment } =
+  const { loadingApartment, apartments, handleGetApartments } =
     useCRUDApartment();
   const { setIsPageLoaderVisible } = useUiContext();
 
   useEffect(() => {
+    if (apartments.length === 0) {
+      handleGetApartments();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setIsPageLoaderVisible(loadingApartment);
-    handleGetApartments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadingApartment]);
 
   return (
